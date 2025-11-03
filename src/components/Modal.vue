@@ -1,5 +1,7 @@
 <script setup>
   import cerrarModal from '../assets/img/cerrar.svg'
+
+  const emit = defineEmits(['ocultar-modal'])
 </script>
 
 <template>
@@ -7,8 +9,56 @@
       <div class="cerrar-modal">
           <img
               :src="cerrarModal"
-              alt=""
+              @click="$emit('ocultar-modal')"
             />
+      </div>
+
+      <div
+          class="contenedor"
+      >
+          <form>
+            <legend>Añadir Gasto</legend>
+
+            <div class="campo">
+              <label for="nombre">Nombre Gasto:</label>
+              <input
+                  type="text"
+                  id="nombre"
+                  placeholder="Añade el nombre del gasto"
+                  >
+            </div>
+
+            <div class="campo">
+              <label for="nombre">Cantidad:</label>
+              <input
+                  type="text"
+                  id="cantidad"
+                  placeholder="Añade la cantidad del gasto (Ej. $300)"
+                  >
+            </div>
+
+            <div class="campo">
+              <label for="nombre">Categoría:</label>
+              <select
+                  id="categoria"
+              >
+                  <option value="">-- Seleccione --</option>
+                  <option value="ahorro">Ahorro</option>
+                  <option value="comida">Comida</option>
+                  <option value="casa">Casa</option>
+                  <option value="gastos">Gastos</option>
+                  <option value="ocio">Ocio</option>
+                  <option value="salud">Salud</option>
+                  <option value="suscripciones">Suscripciones</option>
+              </select>
+            </div>
+
+            <input
+                type="submit"
+                value="Añadir Gasto"
+            >
+          </form>
+
       </div>
   </div>
 </template>
@@ -21,5 +71,14 @@
     left: 0;
     right: 0;
     bottom: 0;
+  }
+  .cerrar-modal {
+    position: absolute;
+    right: 3rem;
+    top: 3rem;
+  }
+  .cerrar-modal img {
+    width: 3rem;
+    cursor: pointer;
   }
 </style>
