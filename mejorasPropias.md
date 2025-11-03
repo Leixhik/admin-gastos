@@ -1,0 +1,2 @@
+Estoy pensando en realizar mis propias mejoras, por ejemplo:
+- Quiero que este proyecto no sea de una tipo lista, creo que es aburrido al momento de hacer un presupuesto, mejor hacer botones con tarjetas y elementos visuales, como por ejemplo la imagen de un carro y saber que es algo sobres "Ahorro Carro".
