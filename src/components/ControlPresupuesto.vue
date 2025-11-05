@@ -35,7 +35,7 @@ const props = defineProps({
 
       <p>
         <span>Gastado:</span>
-        0
+        $0
       </p>
     </div>
   </div>
