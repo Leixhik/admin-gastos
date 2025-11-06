@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, reactive, watch } from "vue";
+  import { ref, reactive, watch, computed } from "vue";
   import Presupuesto from "./components/Presupuesto.vue";
   import ControlPresupuesto from "./components/ControlPresupuesto.vue";
   import Modal from './components/Modal.vue'
@@ -31,6 +31,8 @@
   }, {
     deep:true
   })
+
+  const disponibleActual = computed(() => presupuesto.value - gastado.value)
 
   const definirPresupuesto = (cantidad) => {
     presupuesto.value = cantidad
@@ -85,7 +87,7 @@
       <ControlPresupuesto
         v-else
         :presupuesto="presupuesto"
-        :disponible="disponible"
+        :disponible="disponibleActual"
         :gastado="gastado"
       />
 
