@@ -96,7 +96,8 @@ emit('guardar-gasto')
           class="nuevo-gasto"
           @submit.prevent="agregarGasto"
           >
-        <legend>Añadir Gasto</legend>
+        <legend v-if="props.id === null">Añadir Gasto</legend>
+        <legend v-else="props.id !== null">Editar Gasto</legend>
 
         <Alerta v-if="error">{{ error }}</Alerta>
 
@@ -140,7 +141,8 @@ emit('guardar-gasto')
           </select>
         </div>
 
-        <input type="submit" value="Añadir Gasto" />
+        <input v-if="props.id === null" type="submit" value="Añadir Gasto" />
+        <input v-else="props.id !== null" type="submit" value="Guardar Gasto" />
       </form>
     </div>
   </div>
