@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref /* computed */ } from 'vue'
 import Alerta from "./Alerta.vue";
 import cerrarModal from "../assets/img/cerrar.svg";
 
@@ -81,6 +81,10 @@ if (id) {
 emit('guardar-gasto')
 
 }
+
+const isEditing = computed(() => {
+
+})
 </script>
 
 <template>
@@ -96,6 +100,9 @@ emit('guardar-gasto')
           class="nuevo-gasto"
           @submit.prevent="agregarGasto"
           >
+          <!-- Caso del Profe
+            <legend>{{  isEditing ? 'Guardar Cabmbios' : 'Añadir Gasto' }}</legend>
+          -->
         <legend v-if="props.id === null">Añadir Gasto</legend>
         <legend v-else="props.id !== null">Editar Gasto</legend>
 
@@ -141,6 +148,12 @@ emit('guardar-gasto')
           </select>
         </div>
 
+        <!-- Forma del Profe
+        <input
+          type="submit"
+          :value="[isEditing ? 'Guardar Cambios' : 'Añadir Gasto']"
+          >
+        -->
         <input v-if="props.id === null" type="submit" value="Añadir Gasto" />
         <input v-else="props.id !== null" type="submit" value="Guardar Gasto" />
       </form>
