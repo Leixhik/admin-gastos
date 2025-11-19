@@ -32,6 +32,14 @@
     deep:true
   })
 
+  watch(modal, () => {
+    if (!modal.mostrar) {
+      reiniciarStateGasto();
+    }
+  },  {
+      deep: true
+  })
+
   const disponibleActual = computed(() => presupuesto.value - gastado.value)
 
   const definirPresupuesto = (cantidad) => {
@@ -60,7 +68,12 @@
     })
 
     ocultarModal()
+    reiniciarStateGasto()
 
+  }
+
+  const reiniciarStateGasto = () => {
+        //Reiniciar Objeto
     Object.assign(gasto, {
       nombre: '',
       cantidad: '',
@@ -69,6 +82,13 @@
       fecha: Date.now()
     })
   }
+
+  const seleccionarGasto = id => {
+    const gastoEditar = gastos.value.filter(gasto => gasto.id === id)[0]
+    Object.assign(gasto, gastoEditar);
+    mostrarModal();
+  }
+
 </script>
 
 <template>
@@ -98,10 +118,12 @@
 
       <div class="listado-gastos contenedor">
         <h2>{{ gastos.length > 0 ? 'Gastos' : 'No hay gastos'}}</h2>
+
         <Gasto
           v-for="gasto in gastos"
           :key="gasto.id"
           :gasto="gasto"
+          @seleccionar-gasto="seleccionarGasto"
         />
       </div>
 
