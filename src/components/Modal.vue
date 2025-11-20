@@ -129,7 +129,7 @@ const isEditing = computed(() => {
         </div>
 
         <div class="campo">
-          <label for="nombre">Categoría:</label>
+          <label for="categoria">Categoría:</label>
           <select
               id="categoria"
               :value="categoria"
