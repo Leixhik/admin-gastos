@@ -1,11 +1,11 @@
 <script setup>
-import { ref /* computed */ } from 'vue'
+import { ref, computed} from 'vue'
 import Alerta from "./Alerta.vue";
 import cerrarModal from "../assets/img/cerrar.svg";
 
 const error = ref('')
 
-const emit = defineEmits(['ocultar-modal', 'guardar-gasto', 'update:nombre', 'update:cantidad', 'update:categoria']);
+const emit = defineEmits(['ocultar-modal', 'guardar-gasto', 'update:nombre', 'update:cantidad', 'update:categoria', 'eliminar-gasto']);
 const props = defineProps({
   modal: {
     type: Object,
@@ -83,7 +83,7 @@ emit('guardar-gasto')
 }
 
 const isEditing = computed(() => {
-
+  return props.id
 })
 </script>
 
@@ -100,11 +100,9 @@ const isEditing = computed(() => {
           class="nuevo-gasto"
           @submit.prevent="agregarGasto"
           >
-          <!-- Caso del Profe
-            <legend>{{  isEditing ? 'Guardar Cabmbios' : 'Añadir Gasto' }}</legend>
-          -->
-        <legend v-if="props.id === null">Añadir Gasto</legend>
-        <legend v-else="props.id !== null">Editar Gasto</legend>
+        <legend>{{  isEditing ? 'Editar Gasto' : 'Añadir Gasto' }}</legend>
+        <!-- <legend v-if="props.id === null">Añadir Gasto</legend>
+        <legend v-else="props.id !== null">Editar Gasto</legend> -->
 
         <Alerta v-if="error">{{ error }}</Alerta>
 
@@ -148,15 +146,23 @@ const isEditing = computed(() => {
           </select>
         </div>
 
-        <!-- Forma del Profe
+
         <input
           type="submit"
           :value="[isEditing ? 'Guardar Cambios' : 'Añadir Gasto']"
           >
-        -->
-        <input v-if="props.id === null" type="submit" value="Añadir Gasto" />
-        <input v-else="props.id !== null" type="submit" value="Guardar Gasto" />
+        <!-- <input v-if="props.id === null" type="submit" value="Añadir Gasto" />
+        <input v-else="props.id !== null" type="submit" value="Guardar Gasto" /> -->
       </form>
+
+      <button
+        type="button"
+        class="btn-eliminar"
+        v-if="isEditing"
+        @click="$emit('eliminar-gasto')"
+      >
+        Eliminar Gasto
+      </button>
     </div>
   </div>
 </template>
@@ -231,6 +237,18 @@ const isEditing = computed(() => {
   background-color: var(--azul);
   color: var(--blanco);
   font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-eliminar {
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  background-color: #ef4444;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--blanco);
+  margin-top: 10rem;
   cursor: pointer;
 }
 </style>
