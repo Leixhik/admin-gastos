@@ -30,6 +30,7 @@
   watch(gastos, () => {
     const totalGastado = gastos.value.reduce((total, gasto) => Number(gasto.cantidad) + total, 0)
     gastado.value = totalGastado
+    disponible.value = presupuesto.value - totalGastado
     // Guardado de localStorage
     localStorage.setItem('gastos' ,JSON.stringify(gastos.value))
   }, {
@@ -131,6 +132,13 @@
     return gastos.value
   })
 
+  const resetApp = () => {
+    if (confirm('¿Deseas reiniciar presupuesto y gastos?')) {
+      gastos.value = []
+      presupuesto.value = 0
+    }
+  }
+
 </script>
 
 <template>
@@ -151,6 +159,7 @@
         :presupuesto="presupuesto"
         :disponible="disponibleActual"
         :gastado="gastado"
+        @reset-app="resetApp"
       />
 
       </div>

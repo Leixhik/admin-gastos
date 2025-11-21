@@ -2,6 +2,8 @@
 import imagen from "../assets/img/grafico.jpg";
 import { formatearCantidad } from '../helpers'
 
+const emit = defineEmits(['reset-app'])
+
 const props = defineProps({
   presupuesto:{
     type:Number,
@@ -25,7 +27,13 @@ const props = defineProps({
     </div>
 
     <div class="contenedor-presupuesto">
-      <button class="reset-app">Resetear App</button>
+      <button
+          class="reset-app"
+          type="button"
+          @click="$emit('reset-app')"
+          >
+          Resetear App
+      </button>
 
       <p>
         <span>Presupuesto:</span>
